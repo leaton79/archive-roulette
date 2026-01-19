@@ -35,7 +35,7 @@ A Chrome extension that transforms your new tab page into a serendipity engine f
 
 1. **Download** this repository (Code → Download ZIP) or clone it:
    ```bash
-   git clone https://github.com/yourusername/archive-roulette.git
+   git clone https://github.com/leaton79/archive-roulette.git
    ```
 
 2. **Open Chrome** and navigate to `chrome://extensions/`
