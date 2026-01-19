@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive Roulette</title>
+  <link rel="stylesheet" href="newtab.css">
+  <!-- Using Google Fonts for retro typewriter aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ===== MAIN CONTAINER ===== -->
+  <div class="container">
+    
+    <!-- ===== HEADER WITH BRANDING ===== -->
+    <header class="header">
+      <h1 class="logo">
+        <span class="logo-icon">◈</span>
+        Archive Roulette
+      </h1>
+      <p class="tagline">Random discoveries from digital history</p>
+    </header>
+
+    <!-- ===== FILTER CONTROLS ===== -->
+    <section class="filters" aria-label="Content filters">
+      <!-- Quick Toggle Buttons -->
+      <div class="toggle-bar">
+        <button class="toggle active" data-type="all" title="All media types">
+          All
+        </button>
+        <button class="toggle" data-type="image" title="Photographs, illustrations, posters">
+          Images
+        </button>
+        <button class="toggle" data-type="audio" title="Music, radio, spoken word">
+          Audio
+        </button>
+        <button class="toggle" data-type="movies" title="Films, documentaries, home movies">
+          Video
+        </button>
+        <button class="toggle" data-type="texts" title="Books and documents">
+          Texts
+        </button>
+        <button class="toggle" data-type="software" title="Programs and games">
+          Software
+        </button>
+        <button class="toggle" data-type="web" title="Wayback Machine captures">
+          Web
+        </button>
+        <button class="toggle" data-type="collection:newspapers" title="Historical newspapers">
+          Newspapers
+        </button>
+        <button class="toggle" data-type="collection:magazine_rack" title="Vintage magazines">
+          Magazines
+        </button>
+      </div>
+
+      <!-- Advanced Filters (collapsible) -->
+      <details class="advanced-filters">
+        <summary class="advanced-toggle">⚙ Advanced Filters</summary>
+        <div class="advanced-panel">
+          <div class="filter-group">
+            <label for="year-start">Year Range</label>
+            <div class="year-inputs">
+              <input type="number" id="year-start" placeholder="1800" min="1800" max="2025">
+              <span class="year-separator">to</span>
+              <input type="number" id="year-end" placeholder="2025" min="1800" max="2025">
+            </div>
+          </div>
+          <div class="filter-group">
+            <label for="language-select">Language</label>
+            <select id="language-select">
+              <!-- Populated by JavaScript -->
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="query-text">Keywords</label>
+            <input type="text" id="query-text" placeholder="e.g., jazz, world war, space">
+          </div>
+          <div class="filter-group">
+            <label for="collection-input">Collection ID</label>
+            <input type="text" id="collection-input" placeholder="e.g., prelinger, librivoxaudio">
+          </div>
+          <div class="filter-actions">
+            <button id="apply-filters" class="btn btn-primary">Apply</button>
+            <button id="clear-filters" class="btn btn-secondary">Clear All</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===== MAIN CONTENT DISPLAY ===== -->
+    <main class="content-area">
+      <!-- Loading State -->
+      <div class="loading-state" id="loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Digging through the archives...</p>
+      </div>
+
+      <!-- Item Display (hidden until loaded) -->
+      <article class="item-card" id="item-card" hidden>
+        <!-- Thumbnail / Preview -->
+        <div class="item-preview">
+          <img id="item-thumbnail" src="" alt="" class="item-thumbnail">
+          <span class="item-badge" id="item-badge"></span>
+        </div>
+
+        <!-- Metadata -->
+        <div class="item-info">
+          <h2 class="item-title" id="item-title"></h2>
+          <p class="item-date" id="item-date"></p>
+          <p class="item-description" id="item-description"></p>
+          <p class="item-collection" id="item-collection"></p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="item-actions">
+          <a href="#" id="item-link" class="btn btn-primary" target="_blank" rel="noopener">
+            View on Archive.org →
+          </a>
+          <button id="btn-favorite" class="btn btn-icon" title="Save to favorites">
+            ♡
+          </button>
+          <button id="btn-next" class="btn btn-secondary" title="Find another">
+            ↻ Next
+          </button>
+          <button id="btn-share" class="btn btn-icon" title="Copy link">
+            ⎘
+          </button>
+        </div>
+
+        <!-- Deep Dive Panel (collapsible) -->
+        <details class="deep-dive">
+          <summary class="deep-dive-toggle">📋 Full Metadata</summary>
+          <div class="deep-dive-content" id="deep-dive-content">
+            <!-- Populated by JavaScript -->
+          </div>
+        </details>
+      </article>
+
+      <!-- Error State -->
+      <div class="error-state" id="error" hidden>
+        <p class="error-icon">⚠</p>
+        <p class="error-text" id="error-text">Something went wrong.</p>
+        <button id="btn-retry" class="btn btn-primary">Try Again</button>
+      </div>
+    </main>
+
+    <!-- ===== SIDEBAR: HISTORY & FAVORITES ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" data-tab="history">Recent</button>
+        <button class="sidebar-tab" data-tab="favorites">Favorites</button>
+      </div>
+
+      <!-- History List -->
+      <div class="sidebar-panel" id="history-panel">
+        <ul class="history-list" id="history-list">
+          <!-- Populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Favorites List -->
+      <div class="sidebar-panel" id="favorites-panel" hidden>
+        <ul class="favorites-list" id="favorites-list">
+          <!-- Populated by JavaScript -->
+        </ul>
+        <div class="favorites-actions">
+          <button id="btn-export" class="btn btn-small">Export JSON</button>
+          <label class="btn btn-small">
+            Import
+            <input type="file" id="import-file" accept=".json" hidden>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p>Powered by the <a href="https://archive.org" target="_blank" rel="noopener">Internet Archive</a></p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="storage.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html>
