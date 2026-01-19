@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Node (if you ever add build tools)
+node_modules/
+npm-debug.log
+
+# Package files
+*.zip
+*.tar.gz
+
+# Local development
+.env
+.env.local
+
+# Chrome extension development
+*.pem
+*.crx
